@@ -1,1 +1,1 @@
-# bank_account-junit-tests
+# bank-account-junit-tests
