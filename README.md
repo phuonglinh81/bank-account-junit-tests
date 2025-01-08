@@ -1,8 +1,8 @@
 # bank-account-junit-tests
 ## Overview
-This project demonstrates the implementation of a simple BankAccount program in Java, designed to handle common banking operations like deposits, withdrawals, and balance checks. To ensure reliability and correctness, we use JUnit 5 to write and run unit tests that validate the functionality of the program. The tests also include error handling scenarios for invalid operations.
+This project demonstrates the implementation of a simple BankAccount program in Java, designed to handle common banking operations like deposits, withdrawals, and balance checks. To ensure reliability and correctness, we use JUnit 5 to write and run unit tests that validate the functionality of the program. The tests also include error-handling scenarios for invalid operations.
 ## Test Cases
-This section outlines the various test cases implemented to validate the functionality and robustness of the `BankAccount` class. Each test targets a specific behavior of the program:
+This section outlines the various test cases implemented to validate the functionality and robustness of the `BankAccount` class. Each test targets a specific behaviour of the program:
 ```java
 public class BankAccountTest {
     @Test
@@ -17,16 +17,48 @@ public class BankAccountTest {
         account.deposit(30.0);
         assertEquals(80.0, account.getBalance());
     }
-
+    @Test
+    void testDepositSmallAmount() {
+        BankAccount account = new BankAccount(50.0);
+        account.deposit(0.001);
+        assertEquals(50.001, account.getBalance(), 0.0001); // kiểm tra độ chính xác của số thập phân
+    }
+    @Test
+    void testDepositNegativeAmount() {
+        BankAccount account = new BankAccount(100.0);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            account.deposit(-50.0);
+        });
+        assertEquals("Deposit amount must be positive", exception.getMessage());
+    }
+    @Test
+    void testWithdrawNegativeAmount() {
+        BankAccount account = new BankAccount(100.0);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            account.withdraw(-10.0);
+        });
+        assertEquals("Withdrawal amount must be positive", exception.getMessage());
+    }
     @Test
     void testWithdraw() {
         BankAccount account = new BankAccount(100.0);
         account.withdraw(40.0);
         assertEquals(60.0, account.getBalance());
     }
-
     @Test
-    void testOverdraw() {
+    void testWithdrawAllBalance() {
+        BankAccount account = new BankAccount(100.0);
+        account.withdraw(100.0);
+        assertEquals(0.0, account.getBalance());
+    }
+    @Test
+    void testWithdrawNearBalanceLimit() {
+        BankAccount account = new BankAccount(1000.0);
+        account.withdraw(999.99);
+        assertEquals(0.01, account.getBalance(), 0.0001);
+    }
+    @Test
+    void testWithdrawOverBalance() {
         BankAccount account = new BankAccount(100.0);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             account.withdraw(150.0);
