@@ -66,8 +66,11 @@ This project uses Maven for dependency management. Below is the configuration fo
 ```
 ## Results
 The test suite was executed successfully, confirming that all implemented test cases passed without any errors or failures. Below is the summary of the test results:
+
 ![image](https://github.com/user-attachments/assets/c48c91b1-ae55-4033-aa3f-94fe32578f78)
 ## How to Run
-```xml
+```bash
 mvn test
 ```
+## Link ChatGPT
+This is the ChatGPT conversation link where an example of running JUnit tests was provided. You can review it to better understand the implementation details and testing process. [ChatGPT Example on JUnit Testing](https://chatgpt.com/share/677b68f2-4694-8005-9d7d-b37d5cc09f85)
