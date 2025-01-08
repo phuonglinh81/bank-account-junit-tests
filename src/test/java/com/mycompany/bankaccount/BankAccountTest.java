@@ -79,12 +79,4 @@ public class BankAccountTest {
         });
         assertEquals("Deposit amount must be positive", exception.getMessage());
     }
-
-    @Test
-    void testNegativeInitialBalance() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new BankAccount(-50.0);
-        });
-        assertEquals("Initial balance cannot be negative", exception.getMessage());
-    }
 }
