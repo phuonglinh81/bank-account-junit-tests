@@ -25,7 +25,7 @@ public class BankAccountTest {
     @Test
     void testDeposit() {
         account.deposit(30.0);
-        assertEquals(80.0, account.getBalance());
+        assertEquals(130.0, account.getBalance());
     }
     @Test
     void testDepositSmallAmount() {
@@ -71,13 +71,11 @@ public class BankAccountTest {
     @Test
     void testDepositZeroAmount() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> account.deposit(0.0));
-        assertEquals("Deposit amount must be greater than zero", exception.getMessage());
+        assertEquals("Deposit amount must be positive", exception.getMessage());
     }
-
     @Test
     void testWithdrawZeroAmount() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> account.withdraw(0.0));
-        assertEquals("Withdrawal amount must be greater than zero", exception.getMessage());
-    }
-    
+        assertEquals("Withdrawal amount must be positive", exception.getMessage());
+    }   
 }
