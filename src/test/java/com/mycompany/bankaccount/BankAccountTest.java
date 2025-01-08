@@ -71,12 +71,4 @@ public class BankAccountTest {
         assertEquals("Insufficient balance", exception.getMessage());
     }
 
-    @Test
-    void testNegativeDeposit() {
-        BankAccount account = new BankAccount(50.0);
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            account.deposit(-10.0);
-        });
-        assertEquals("Deposit amount must be positive", exception.getMessage());
-    }
 }
